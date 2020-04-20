@@ -83,22 +83,24 @@ export default {
   },
   async created() {
     this.playlist = [];
+    this.searchList = this.$store.getters.getSearchResults;
+    
     await SongService.retrievePlaylist(this.$store.getters.userInfo)
       .then(res => {
         if (res.status == 200) {
           this.playlist = res.data.result.songs;
           this.playlistName = res.data.result.playlistName;
-        }
+        } 
       })
       .catch(err => {
         console.log(err);
       });
 
-    this.searchList = this.$store.getters.getSearchResults;
-    if (this.searchList == null)
-      this.searchList = [];
-    
-    if (this.searchList != null || this.searchList != []) {
+    if (
+      this.searchList != null &&
+      this.searchList != [] &&
+      this.playlist != []
+    ) {
       this.searchList.forEach(e => {
         e.checked = false;
       });
