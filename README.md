@@ -1,5 +1,6 @@
 # s12g8
-Infinite Loop is a music player webapp made by Carlos Shi, Erwin Chen, and Andilyn Uy.
+![GitHub Logo](https://raw.githubusercontent.com/ccapdev1920T2/s12g8/master/public/images/InfiniteLoop.png)
+Infinite Loop is a music player webapp made by **Carlos Shi**, **Erwin Chen**, and **Andilyn Uy**. It implements Vue as the frontend framework, MongoDB as database and node.js express as backend framework.
 
 ## How to install
 1. Clone the project
@@ -8,4 +9,7 @@ Infinite Loop is a music player webapp made by Carlos Shi, Erwin Chen, and Andil
 4. Type `npm run dev` to first terminal and `npm run serve` to the second terminal
 5. Open up your browser and go to http://localhost:8080/ to view frontend
 6. Login with admin account with username = admin and password = admin
-7. View mongoDB changes using mongoDB compasss with the connection string located in models/db.js
+7. View mongoDB changes using mongoDB compass with the connection string located in models/db.js
+
+## Acknowledgment
+This project could not be completed without the help of our professor Arren Antioquia. For that we extend our gratitude for his guidance.
