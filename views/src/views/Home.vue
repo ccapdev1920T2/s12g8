@@ -22,7 +22,7 @@
               <button class="btn-search" @click.prevent="search">SEARCH</button>
             </div>
           </div>
-          <span class="info">ex. Song Title, Artist</span>
+          <span class="info">ex. Song Title or Artist</span>
         </form>
       </div>
     </main>
