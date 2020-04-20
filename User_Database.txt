@@ -25,6 +25,6 @@
 9) 	email: JustinChua@gmail.com
 	username: RoyalKnight123
 	password: Justin
-10) email: DennisLu@gmail.com
+10) 	email: DennisLu@gmail.com
 	username: WoShiShaBi
 	password: Dennis
