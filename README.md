@@ -7,3 +7,4 @@ Infinite Loop is a music player webapp made by Carlos Shi, Erwin Chen, and Andil
 3. Type `npm install` or `npm i` to both terminals
 4. Type `npm run dev` to first terminal and `npm run serve` to the second terminal
 5. Open up your browser and go to http://localhost:8080/ to view frontend
+6. Login with admin account with username = admin and password = admin
