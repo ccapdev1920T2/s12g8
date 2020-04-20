@@ -10,6 +10,9 @@ Infinite Loop is a music player webapp made by **Carlos Shi**, **Erwin Chen**, a
 5. Open up your browser and go to http://localhost:8080/ to view frontend
 6. Login with admin account with username = admin and password = admin
 7. View mongoDB changes using mongoDB compass with the connection string located in models/db.js
+### Note
+- Songs may take 2-3 minutes to appear after trying to add one
+- Other part of the application may also take some time depending on connectivity
 
 ## Acknowledgment
 This project could not be completed without the help of our professor Arren Antioquia. For that we extend our gratitude for his guidance.
