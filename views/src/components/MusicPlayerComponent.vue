@@ -210,7 +210,7 @@ export default {
       this.play = 0;
       this.$refs.audio.pause();
       this.playSong();
-      console.log(this.currentSong.title + " loaded");
+      console.log(this.currentSong.title + " loaded.");
     },
 
     prevSong() {
