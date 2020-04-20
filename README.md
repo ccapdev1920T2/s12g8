@@ -1,6 +1,6 @@
 # s12g8
 ![GitHub Logo](https://raw.githubusercontent.com/ccapdev1920T2/s12g8/master/public/images/InfiniteLoop.png)
-Infinite Loop is a music player webapp made by **Carlos Shi**, **Erwin Chen**, and **Andilyn Uy**. It implements Vue as the frontend framework, MongoDB as database and node.js express as backend framework.
+Infinite Loop is a music player webapp made by **Carlos Shi**, **Erwin Chen**, and **Andilyn Uy**. It implements Vue as the frontend framework, MongoDB as database and node.js express as backend framework. This project has been deployed to heroku with this link https://infinite-loop.herokuapp.com/.
 
 ## How to install
 1. Clone the project
