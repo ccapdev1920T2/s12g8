@@ -126,6 +126,7 @@ export default {
   },
   methods: {
     async deleteSong(song) {
+      console.log(song.url);
       await SongService.deleteSong(song.url)
         .then(res => {
           console.log(res.status);
