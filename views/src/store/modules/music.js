@@ -1,7 +1,6 @@
 const state = {
   toggleMusicPlayer: false,
-  searchResults: null,
-  playlist: null,
+  searchResults: null
 };
 
 const getters = {

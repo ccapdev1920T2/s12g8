@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const songurl = 'http://localhost:3000/api/song';
-const playlisturl = 'http://localhost:3000/api/playlist';
+const songurl = 'api/song';
+const playlisturl = 'api/playlist';
 
 class SongService {
     static addSong(song) {

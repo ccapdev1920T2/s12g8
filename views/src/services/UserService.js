@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = 'http://localhost:3000/api/user';
+const url = 'api/user';
 
 class UserService {
     static addUser(user) {
