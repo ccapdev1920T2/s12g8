@@ -66,10 +66,8 @@ const songDBController = {
   },
 
   deleteSong: function (req, res) {
-    Song.findOneAndDelete({ url: req.params.url })
-      .exec()
+    Song.findOneAndDelete({ url: req.body.url })
       .then((result) => {
-        console.log(result);
         res.status(200).json({
           message: "Song deleted.",
         });

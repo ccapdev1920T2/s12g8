@@ -70,7 +70,13 @@
             v-model="selectedSong.lyrics"
             rows="3"
           ></textarea>
-          <input type="text" :class="{error: errors.url}" v-model="selectedSong.url" id="uploads" />
+          <input
+            type="text"
+            :class="{error: errors.url}"
+            disabled="true"
+            v-model="selectedSong.url"
+            id="uploads"
+          />
           <input
             type="text"
             :class="{error: errors.coverImage}"
@@ -126,10 +132,9 @@ export default {
   },
   methods: {
     async deleteSong(song) {
-      console.log(song.url);
       await SongService.deleteSong(song.url)
         .then(res => {
-          console.log(res.status);
+          console.log(res);
         })
         .catch(err => {
           console.log(err);
@@ -175,13 +180,13 @@ export default {
         flag = true;
         this.errors.coverImage = true;
       }
-      
+
       if (!flag) {
         this.editMode = false;
         await SongService.updateSong({
           title: this.selectedSong.title,
           artist: this.selectedSong.artist,
-          genre: this.selectedSong.genre.split(',').map(item => item.trim()),
+          genre: this.selectedSong.genre.split(",").map(item => item.trim()),
           duration: this.selectedSong.duration,
           lyrics: lyricsArray,
           coverImage: this.selectedSong.coverImage,
@@ -197,6 +202,19 @@ export default {
           .catch(err => {
             console.log(err);
           });
+        await SongService.getAllSongs()
+          .then(res => {
+            if (res.status == 200) this.songList = res.data.results;
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        if (this.songList == null) this.songList = [];
+        else {
+          this.songList.forEach(e => {
+            e.editMode = false;
+          });
+        }
       }
     },
     formatSong(song) {

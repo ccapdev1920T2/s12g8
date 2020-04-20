@@ -8,7 +8,7 @@ router.get('/search/:query', songDBController.getSongs);
 
 router.get('/list', songDBController.getAllSongs);
 
-router.delete('/delete/:url', songDBController.deleteSong);
+router.post('/delete', songDBController.deleteSong);
 
 router.patch('/update', songDBController.updateSong);
 

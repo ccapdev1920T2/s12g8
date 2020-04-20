@@ -3,6 +3,7 @@ const password = 'p%40ssword';
 
 mongoose.Promise = global.Promise
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 const database = {
 

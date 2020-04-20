@@ -13,7 +13,7 @@ class SongService {
     }
 
     static deleteSong(url) {
-        return axios.delete(`${songurl}/delete/${url}`);
+        return axios.post(`${songurl}/delete`, {url: url});
     }
 
     static updateSong(song) {
