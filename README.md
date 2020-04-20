@@ -3,7 +3,7 @@
 
 Infinite Loop is a music player webapp made by **Carlos Shi**, **Erwin Chen**, and **Andilyn Uy**. It implements Vue as the frontend framework, MongoDB as database and node.js express as backend framework. This project has been deployed to heroku with this link https://infinite-loop.herokuapp.com/.
 
-## How to install
+## How to Install
 1. Clone the project
 2. Open up two terminals for the frontend and the backend by typing `cmd` in Run, the first terminal will be at the root directory and the second will be at the views directory, navigate by using `cd`
 3. Type `npm install` or `npm i` to both terminals
