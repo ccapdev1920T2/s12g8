@@ -177,7 +177,6 @@ form.form {
 
 #displayError {
   color: red;
-  font-family: "Ubuntu", sans-serif;
   font-size: 16px;
   margin: 0px 0px 0px 50px;
   padding: 0 0 25px 0;

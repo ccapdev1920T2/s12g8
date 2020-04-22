@@ -339,6 +339,7 @@ form.form {
   padding-top: 10px;
   font-family: "Ubuntu", sans-serif;
   margin-left: 39%;
+  margin-bottom: 10px;
   font-size: 13px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
@@ -348,7 +349,6 @@ form.form {
 
 #displayError {
   color: red;
-  font-family: "Ubuntu", sans-serif;
   font-size: 16px;
   margin: 0px 0px 0px 50px;
   padding: 0px 0px 25px 0px;

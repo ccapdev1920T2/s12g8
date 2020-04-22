@@ -38,14 +38,14 @@
           name="song-length"
           id="slength"
           align="center"
-          placeholder="Song Length"
+          placeholder="Song Length (in seconds)"
         />
         <textarea
           id="lyrics"
           name="lyrics"
           :class="{error: errors.lyrics}"
           v-model="songInfo.lyrics"
-          placeholder="Insert lyrics here"
+          placeholder="Insert lyrics here (separated by newline)"
           rows="3"
         ></textarea>
         <input
@@ -69,7 +69,9 @@
           align="center"
           value="Submit"
         />
-        <p id="displayMessage">{{ message }}</p>
+        <div>
+        <p id="displayError" v-for="(message, index) in errorMessage" :key="index">{{message}}</p>
+        </div>
       </div>
     </form>
   </div>
@@ -101,42 +103,73 @@ export default {
         url: false,
         coverImage: false
       },
-      message: ""
+      errorMessage: []
     };
   },
   methods: {
     addSong: async function () {
       var lyricsArray = [];
+      this.errors = {
+        title: false,
+        artist: false,
+        genre: false,
+        duration: false,
+        lyrics: false,
+        url: false,
+        coverImage: false
+      };
+      this.errorMessage = [];
+
+
       var flag = false;
       if (this.songInfo.title === ""){
         flag = true;
         this.errors.title = true;
+        this.errorMessage.push("Title cannot be blank!");
       }
       if (this.songInfo.artist === ""){
         flag = true;
         this.errors.artist = true;
+        this.errorMessage.push("Artist cannot be blank!");
       }
       if (this.songInfo.genre === ""){
         flag = true;
         this.errors.genre = true;
+        this.errorMessage.push("Genre cannot be blank!");
       }
       if (this.songInfo.duration === "" || !validator.isNumeric(this.songInfo.duration)){
         flag = true;
         this.errors.duration = true;
+        if (this.songInfo.duration === ""){
+          this.errorMessage.push("Duration cannot be blank!");
+        } else {
+          this.errorMessage.push("Duration must be numeric!");
+        }
       }
       if (this.songInfo.lyrics === ""){
         flag = true;
         this.errors.lyrics = true;
+        this.errorMessage.push("Lyrics cannot be blank!");
       } else {
         lyricsArray = this.songInfo.lyrics.split('\n');
       }
       if (this.songInfo.url === "" || !validator.isURL(this.songInfo.url)){
         flag = true;
         this.errors.url = true;
+        if(this.songInfo.url === "") {
+          this.errorMessage.push("Song URL cannot be blank!");
+        } else {
+          this.errorMessage.push("Song URL must be a valid URL ending in mp3 or audio format!");
+        }
       }
-      if (this.songInfo.coverImage === ""){
+      if (this.songInfo.coverImage === ""|| !validator.isURL(this.songInfo.coverImage)){
         flag = true;
         this.errors.coverImage = true;
+        if (this.songInfo.coverImage === "") {
+          this.errorMessage.push("Image URL cannot be blank!");
+        } else {
+          this.errorMessage.push("Image URL must be a valid URL ending in png or image format!");
+        }
       }
 
       if (!flag) {
@@ -150,9 +183,9 @@ export default {
           url: this.songInfo.url
         }).then(res => {
           if (res.status === 201) {
-            this.message = "Successfully added!";
+            this.errorMessage.push("Song successfully added!");
           } else {
-            this.message = "Song exists or an error has occurred!";
+            this.errorMessage.push("Song exists or an error has occurred!");
           }
         }).catch(err => {
           console.log(err);
@@ -195,6 +228,10 @@ export default {
 
 .error {
   border-color: rgb(241, 66, 66) !important;
+}
+
+#displayError {
+  color: red;
 }
 
 #imagebox {
