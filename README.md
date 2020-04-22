@@ -22,3 +22,8 @@ Infinite Loop is a music player webapp. It implements Vue as the frontend framew
 
 ## Acknowledgment
 This project could not be completed without the help of our professor Arren Antioquia. For that we extend our gratitude for his guidance.
+### Special Thanks
+- Ricardo Zhao, for making the logo
+- [Traversy Media](https://www.youtube.com/channel/UC29ju8bIPH5as8OGnQzwJyA), [Academind](https://www.youtube.com/channel/UCSJbGtTlrDami-tDGPUV9-w) and other youtubers for walking us through Vue, Vuex, heroku, express, mongoDB, npm packages and node.js. 
+- [Stackoverflow](https://stackoverflow.com/) for solving some of our javascript concerns.
+- Related websites that also walked me through Vue and its packages.
