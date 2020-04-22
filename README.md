@@ -9,10 +9,12 @@ Infinite Loop is a music player webapp. It implements Vue as the frontend framew
 3. Type `npm install` or `npm i` to both terminals
 4. Type `npm run dev` to first terminal and `npm run serve` to the second terminal
 5. Open up your browser and go to http://localhost:8080/ to view frontend
-6. Login with admin account with username = admin and password = admin
+6. Login with admin account with `username = admin` and `password = admin`
 7. View mongoDB changes using mongoDB compass with the connection string located in models/db.js
 ### Note
 - Songs may take 2-3 minutes to appear after trying to add one
+- Other accounts can be found inside https://github.com/ccapdev1920T2/s12g8/blob/master/misc/User_Database.txt
+- If ever songs need to be re-inserted manually refer to https://github.com/ccapdev1920T2/s12g8/blob/master/misc/songDB.json
 - Other part of the application may also take some time depending on connectivity
 
 ## Authors
@@ -27,3 +29,4 @@ This project could not be completed without the help of our professor Arren Anti
 - [Traversy Media](https://www.youtube.com/channel/UC29ju8bIPH5as8OGnQzwJyA), [Academind](https://www.youtube.com/channel/UCSJbGtTlrDami-tDGPUV9-w) and other youtubers for walking us through Vue, Vuex, Heroku, express.js, MongoDB, Mongoose, npm packages and node.js
 - [Stack Overflow](https://stackoverflow.com/) for solving some of our javascript concerns
 - Related websites that also walked me through Vue and its packages
+- [Other references](https://github.com/ccapdev1920T2/s12g8/blob/master/misc/References.txt)
