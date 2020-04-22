@@ -41,7 +41,7 @@ export default {
         });
     },
     togglePlayer() {
-      this.$store.commit("togglePlayer", true);
+      this.$store.commit("togglePlayer");
     }
   }
 };

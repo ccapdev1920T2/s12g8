@@ -338,6 +338,10 @@ export default {
             return item.url !== song.url;
           });
           this.searchText();
+          if(playlist.length == 0) {
+            this.currentSong = {};
+            this.$emit('toggle');
+          }
           if(this.currentSong.url == song.url){
             this.nextSong();
           }
