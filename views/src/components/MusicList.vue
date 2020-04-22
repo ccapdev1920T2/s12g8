@@ -95,23 +95,22 @@ export default {
         if (res.status == 200) {
           this.playlist = res.data.result.songs;
           this.playlistName = res.data.result.playlistName;
+          this.searchList.forEach(e => {
+            e.checked = false;
+          });
+
+          for (var i = 0; i < this.searchList.length; i++) {
+            for (var j = 0; j < this.playlist.length; j++) {
+              if (this.searchList[i].url == this.playlist[j].url) {
+                this.searchList[i].checked = true;
+              }
+            }
+          }
         }
       })
       .catch(err => {
         console.log(err);
       });
-
-    this.searchList.forEach(e => {
-      e.checked = false;
-    });
-
-    for (var i = 0; i < this.searchList.length; i++) {
-      for (var j = 0; j < this.playlist.length; j++) {
-        if (this.searchList[i].url == this.playlist[j].url) {
-          this.searchList[i].checked = true;
-        }
-      }
-    }
   },
   methods: {
     async onChange(song, $event) {
