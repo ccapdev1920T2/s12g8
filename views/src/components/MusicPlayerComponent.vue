@@ -337,6 +337,7 @@ export default {
           this.playlist = this.playlist.filter(item => {
             return item.url !== song.url;
           });
+          this.searchText();
         })
         .catch(err => {
           console.log(err);
