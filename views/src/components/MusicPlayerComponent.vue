@@ -338,7 +338,7 @@ export default {
             return item.url !== song.url;
           });
           this.searchText();
-          if(playlist.length == 0) {
+          if(this.playlist.length == 0) {
             this.currentSong = {};
             this.$emit('toggle');
           }

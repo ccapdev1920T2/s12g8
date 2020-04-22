@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      toggleMusicPlayer: await this.$store.getters.getToggleStatus
+      toggleMusicPlayer: this.$store.getters.getToggleStatus
     };
   }
 };
