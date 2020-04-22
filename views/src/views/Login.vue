@@ -22,7 +22,7 @@
       />
       <input type="submit" class="submit" name="submit" value="Log in" />
     </form>
-    <p id="displayError">{{errorMessage}}</p>
+    <p id="displayError" v-for="(message, index) in errorMessage" :key="index">{{message}}</p>
   </div>
 </template>
 
@@ -41,15 +41,25 @@ export default {
         account: false,
         password: false
       },
-      errorMessage: ""
+      errorMessage: []
     };
   },
   methods: {
     logUser: async function() {
-      this.errorMessage = "";
+      this.errorMessage = [];
+      this.errors = {
+        account: false,
+        password: false
+      };
       if (this.userInfo.account === "" || this.userInfo.password === "") {
-        if (this.userInfo.account === "") this.errors.account = true;
-        if (this.userInfo.password === "") this.errors.password = true;
+        if (this.userInfo.account === ""){
+          this.errors.account = true;
+          this.errorMessage.push("Account cannot be blank!");
+        } 
+        if (this.userInfo.password === ""){
+          this.errors.password = true;
+          this.errorMessage.push("Password cannot be blank!");
+        } 
       } else {
         await UserService.login({
           account: this.userInfo.account,
@@ -59,10 +69,11 @@ export default {
             if (res.status == 200) {
               this.$store.dispatch('retrieveToken', res);
               this.$router.push("/");
+            } else {
+              this.errorMessage.push("Password cannot be blank!");
             }
           })
           .catch(err => {
-            this.errorMessage = "Login failed!";
             console.log(err);
           });
       }
@@ -145,6 +156,7 @@ form.form {
 
 .submit {
   margin-top: 14px;
+  margin-bottom: 10px;
   cursor: pointer;
   border-radius: 5em;
   color: #fff;
@@ -167,7 +179,8 @@ form.form {
   color: red;
   font-family: "Ubuntu", sans-serif;
   font-size: 16px;
-  margin: 25px 0px 0px 50px;
+  margin: 0px 0px 0px 50px;
+  padding: 0 0 25px 0;
 }
 
 @media (max-width: 600px) {
