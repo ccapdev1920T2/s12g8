@@ -133,7 +133,7 @@ export default {
         !validator.isLength(this.newUser.password, { min: 6, max: 128 })
       ) {
         this.errors.password = true;
-        this.errorMessage.push("Password too short!");
+        this.errorMessage.push("Password too short! (minimum of 6 alphanumeric characters)");
       } else if (this.newUser.password != this.newUser.confirmPW) {
         this.errors.confirmPW = true;
         this.errors.password = true;
