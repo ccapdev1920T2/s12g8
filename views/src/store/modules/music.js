@@ -15,8 +15,8 @@ const getters = {
 const actions = {};
 
 const mutations = {
-  togglePlayer(state) {
-    state.toggleMusicPlayer = !state.toggleMusicPlayer;
+  togglePlayer(state, decision) {
+    state.toggleMusicPlayer = decision;
   },
   retrieveSearchResults(state, results) {
     state.searchResults = results;
