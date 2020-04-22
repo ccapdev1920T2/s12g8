@@ -88,7 +88,8 @@ export default {
   },
   async created() {
     this.playlist = [];
-    this.searchList = this.$store.getters.getSearchResults;
+    this.searchList = await this.$store.getters.getSearchResults;
+    console.log(this.searchList);
 
     await SongService.retrievePlaylist(this.$store.getters.userInfo)
       .then(res => {
