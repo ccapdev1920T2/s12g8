@@ -70,7 +70,7 @@ export default {
               this.$store.dispatch('retrieveToken', res);
               this.$router.push("/");
             } else {
-              this.errorMessage.push("Password cannot be blank!");
+              this.errorMessage.push("Username or password is incorrect!");
             }
           })
           .catch(err => {

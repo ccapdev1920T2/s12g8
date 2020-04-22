@@ -84,7 +84,9 @@
             id="uploadi"
           />
           <input type="submit" id="submit" class="submit" align="center" value="Submit" />
-          <p id="displayMessage">{{ message }}</p>
+          <div>
+            <p id="displayError" v-for="(message, index) in errorMessage" :key="index">{{message}}</p>
+          </div>
         </div>
       </form>
     </div>
@@ -111,7 +113,7 @@ export default {
         url: false,
         coverImage: false
       },
-      message: ""
+      errorMessage: []
     };
   },
   computed: {},
@@ -146,39 +148,66 @@ export default {
     },
     updateSong: async function() {
       var lyricsArray = [];
+      this.errors = {
+        title: false,
+        artist: false,
+        genre: false,
+        duration: false,
+        lyrics: false,
+        url: false,
+        coverImage: false
+      };
+      this.errorMessage = [];
+
       var flag = false;
-      if (this.selectedSong.title === "") {
+      if (this.songInfo.title === "") {
         flag = true;
         this.errors.title = true;
+        this.errorMessage.push("Title cannot be blank!");
       }
-      if (this.selectedSong.artist === "") {
+      if (this.songInfo.artist === "") {
         flag = true;
         this.errors.artist = true;
+        this.errorMessage.push("Artist cannot be blank!");
       }
-      if (this.selectedSong.genre === "") {
+      if (this.songInfo.genre === "") {
         flag = true;
         this.errors.genre = true;
-      }
-      if (this.selectedSong.duration === "") {
-        flag = true;
-        this.errors.duration = true;
-      }
-      if (this.selectedSong.lyrics === "") {
-        flag = true;
-        this.errors.lyrics = true;
-      } else {
-        lyricsArray = this.selectedSong.lyrics.split("\n");
+        this.errorMessage.push("Genre cannot be blank!");
       }
       if (
-        this.selectedSong.url === "" ||
-        !validator.isURL(this.selectedSong.url)
+        this.songInfo.duration === "" ||
+        !validator.isNumeric(this.songInfo.duration)
       ) {
         flag = true;
-        this.errors.url = true;
+        this.errors.duration = true;
+        if (this.songInfo.duration === "") {
+          this.errorMessage.push("Duration cannot be blank!");
+        } else {
+          this.errorMessage.push("Duration must be numeric!");
+        }
       }
-      if (this.selectedSong.coverImage === "") {
+      if (this.songInfo.lyrics === "") {
+        flag = true;
+        this.errors.lyrics = true;
+        this.errorMessage.push("Lyrics cannot be blank!");
+      } else {
+        lyricsArray = this.songInfo.lyrics.split("\n");
+      }
+
+      if (
+        this.songInfo.coverImage === "" ||
+        !validator.isURL(this.songInfo.coverImage)
+      ) {
         flag = true;
         this.errors.coverImage = true;
+        if (this.songInfo.coverImage === "") {
+          this.errorMessage.push("Image URL cannot be blank!");
+        } else {
+          this.errorMessage.push(
+            "Image URL must be a valid URL ending in png or image format!"
+          );
+        }
       }
 
       if (!flag) {
@@ -194,9 +223,9 @@ export default {
         })
           .then(res => {
             if (res.status === 201) {
-              this.message = "Successfully updated!";
+              this.errorMessage.push("Successfully updated!");
             } else {
-              this.message = "Song exists or an error has occurred!";
+              this.errorMessage.push("Song exists or an error has occurred!");
             }
           })
           .catch(err => {

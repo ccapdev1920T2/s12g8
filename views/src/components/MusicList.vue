@@ -30,6 +30,12 @@
             <span class="duration">{{ formatSeconds(item.duration) }}</span>
           </li>
         </ul>
+        
+      </div>
+      <div>
+        <p id="tooltip"> Click the heart to add to your playlist! Click again to remove!</p>
+        <p id="tooltip"> Click on the song to view album image!</p>
+        <p id="tooltip"> Click the play button to the right side to play your playlist!</p>
       </div>
     </div>
     <div class="box_right">
@@ -45,8 +51,8 @@
       <div class="playlist_box">
         <ul>
           <li class="playlist_title clearfix border-top">
-            <span class="title">
-              {{ playlistName }}&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="title" @click="$emit('toggle')">
+              {{ playlistName }} &nbsp;&nbsp;&nbsp;&nbsp;
               <i
                 id="play"
                 @click="$emit('toggle')"
@@ -60,7 +66,7 @@
             :key="index"
             @click="selectedItem = item"
           >
-            <span class="title">{{ item.title }}</span>
+            <span class="title">{{ index+1 }}&nbsp;&nbsp;&nbsp;&nbsp;{{ item.title }}</span>
           </li>
         </ul>
       </div>
@@ -295,6 +301,10 @@ li {
   width: 450px;
 }
 
+#tooltip {
+  padding-left: 50px;
+}
+
 .playlist_box ul {
   margin: 0;
   padding: 0;
@@ -320,7 +330,7 @@ li {
 .music_list {
   width: 1100px;
   margin-top: 30px;
-  height: 600px;
+  height: 500px;
   overflow-y: scroll;
   scrollbar-width: 5px thin;
   scrollbar-color: darkgrey rgba(0, 0, 0, 0);
