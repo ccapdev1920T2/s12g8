@@ -40,8 +40,12 @@ export default {
           console.log(err);
         });
     },
-    togglePlayer() {
-      this.$store.commit("togglePlayer", true);
+    async togglePlayer() {
+      if (this.$router.currentRoute.path == '/player'){
+        await this.$store.commit("togglePlayer");
+      } else {
+        await this.$store.commit("togglePlayerWithDecision", true);
+      }
     }
   }
 };

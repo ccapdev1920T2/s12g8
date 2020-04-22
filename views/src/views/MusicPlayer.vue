@@ -1,8 +1,8 @@
 <template>
   <div class="music_div">
-    <MusicList v-show="!toggleMusicPlayer" @toggle="toggleMusicPlayer = true" />
-    <MusicPlayerComponent v-show="toggleMusicPlayer" @toggle="toggleMusicPlayer = false" />
-    <div class="bg_player_mask" v-show="toggleMusicPlayer"></div>
+    <MusicList v-if="!$store.getters.getToggleStatus" @toggle="$store.getters.getToggleStatus = true" />
+    <MusicPlayerComponent v-if="$store.getters.getToggleStatus" @toggle="$store.getters.getToggleStatus = false" />
+    <div class="bg_player_mask" v-if="$store.getters.getToggleStatus"></div>
   </div>
 </template>
 
@@ -17,8 +17,7 @@ export default {
     MusicPlayerComponent
   },
   data() {
-    return {
-      toggleMusicPlayer: this.$store.getters.getToggleStatus
+    return{
     };
   }
 };

@@ -233,7 +233,6 @@ export default {
       this.reset();
       this.previousTime = 0;
       if (this.songShuffle == 1) {
-        // while(this.index = )
         this.index =
           parseInt(Math.random() * this.playlist.length) % this.playlist.length;
         console.log(this.index);
@@ -338,12 +337,16 @@ export default {
             return item.url !== song.url;
           });
           this.searchText();
-          if(this.playlist.length == 0) {
+          if (this.playlist.length == 0) {
+            this.playSong();
             this.currentSong = {};
-            this.$emit('toggle');
+            this.$emit("toggle");
           }
-          if(this.currentSong.url == song.url){
-            this.nextSong();
+          if (this.currentSong.url == song.url) {
+            this.currentSong = this.playlist[0];
+            this.loadSong();
+            this.play = 0;
+            this.playSong();
           }
         })
         .catch(err => {
@@ -356,8 +359,12 @@ export default {
         this.filteredPlaylist = this.playlist;
       } else {
         this.filteredPlaylist = this.playlist.filter(song => {
-          return song.title.toLowerCase().includes(this.searchString.toLowerCase()) ||
-            song.artist.toLowerCase().includes(this.searchString.toLowerCase());
+          return (
+            song.title
+              .toLowerCase()
+              .includes(this.searchString.toLowerCase()) ||
+            song.artist.toLowerCase().includes(this.searchString.toLowerCase())
+          );
         });
       }
     }
@@ -994,5 +1001,4 @@ export default {
 .floating-icon:nth-child(2) {
   right: 12vh;
 }
-
 </style>
