@@ -12,8 +12,8 @@ class SongService {
         return axios.get(`${songurl}/search/${query}`);
     }
 
-    static deleteSong(url, username) {
-        return axios.post(`${songurl}/delete`, {url: url, username: username});
+    static deleteSong(url) {
+        return axios.post(`${songurl}/delete`, {url: url});
     }
 
     static updateSong(song) {

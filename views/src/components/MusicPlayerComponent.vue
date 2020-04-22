@@ -990,4 +990,5 @@ export default {
 .floating-icon:nth-child(2) {
   right: 12vh;
 }
+
 </style>
