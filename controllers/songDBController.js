@@ -138,6 +138,7 @@ const songDBController = {
                 lyrics: req.body.lyrics,
                 duration: req.body.duration,
                 coverImage: req.body.coverImage,
+                url: req.body.url,
               },
             },
           },
