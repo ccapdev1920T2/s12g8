@@ -134,7 +134,7 @@ export default {
   },
   methods: {
     async deleteSong(song) {
-      await SongService.deleteSong(song.url)
+      await SongService.deleteSong(song.url, this.$store.getters.userInfo)
         .then(res => {
           console.log(res);
         })
@@ -177,7 +177,7 @@ export default {
       }
       if (
         this.selectedSong.duration === "" ||
-        !validator.isNumeric(this.selectedSong.duration)
+        !validator.isNumeric(this.selectedSong.duration.toString())
       ) {
         flag = true;
         this.errors.duration = true;
@@ -221,13 +221,6 @@ export default {
           coverImage: this.selectedSong.coverImage,
           url: this.selectedSong.url
         })
-          .then(res => {
-            if (res.status === 201) {
-              this.errorMessage.push("Successfully updated!");
-            } else {
-              this.errorMessage.push("Song exists or an error has occurred!");
-            }
-          })
           .catch(err => {
             console.log(err);
           });

@@ -1,4 +1,5 @@
 const Song = require("../models/SongModel");
+const Playlist = require("../models/PlaylistModel");
 
 const songDBController = {
   postUpload: function (req, res) {
@@ -68,9 +69,22 @@ const songDBController = {
   deleteSong: function (req, res) {
     Song.findOneAndDelete({ url: req.body.url })
       .then((result) => {
-        res.status(200).json({
-          message: "Song deleted.",
-        });
+        Playlist.updateMany(
+          {},
+          { $pull: { songs: { url: req.body.url } } },
+          { new: true }
+        )
+          .then(
+            res.status(200).json({
+              message: "Song deleted and playlist updated",
+            })
+          )
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+              error: err,
+            });
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -109,12 +123,39 @@ const songDBController = {
         duration: req.body.duration,
         coverImage: req.body.coverImage,
       },
-      {new: true}
+      { new: true }
     )
-      .then(() => {
-        res.status(200).json({
-          message: "Updated.",
-        });
+      .then((result) => {
+        console.log(result);
+        Playlist.updateMany(
+          {'songs.url' : req.body.url},
+          {
+            $set: {
+              'songs.$': {
+                title: req.body.title,
+                artist: req.body.artist,
+                genre: req.body.genre,
+                lyrics: req.body.lyrics,
+                duration: req.body.duration,
+                coverImage: req.body.coverImage,
+              },
+            },
+          },
+          { new: true }
+        )
+          .then(() =>{
+            res.status(200).json({
+              message: "Song updated and playlist updated",
+            })
+          }
+            
+          )
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+              error: err,
+            });
+          });
       })
       .catch((err) => {
         console.log(err);

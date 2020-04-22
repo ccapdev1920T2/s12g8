@@ -338,6 +338,9 @@ export default {
             return item.url !== song.url;
           });
           this.searchText();
+          if(this.currentSong.url == song.url){
+            this.nextSong();
+          }
         })
         .catch(err => {
           console.log(err);
