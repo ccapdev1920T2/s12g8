@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const userSignupController = {
   postSignUp: function (req, res) {
-    User.findOne({ email: req.body.email })
+    User.findOne({$or: [{ email: req.body.account }, {username: req.body.account}]})
       .exec()
       .then((user) => {
         if (user) {

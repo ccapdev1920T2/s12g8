@@ -3,6 +3,7 @@
     <p class="sign" align="center">Registration</p>
     <form id="signup" class="form" name="form" @submit.prevent="checkForm">
       <label for="fname"></label>
+      <br />
       <input
         type="text"
         :class="{error: errors.firstName}"
@@ -50,7 +51,7 @@
         name="pw"
         id="pw"
         align="center"
-        placeholder="Password"
+        placeholder="Password (at least 6 characters)"
       />
       <label for="cpw"></label>
       <input
@@ -64,13 +65,13 @@
       />
       <input type="submit" class="submit" id="submit" value="Sign Up" />
     </form>
-    <p id="displayError">{{errorMessage}}</p>
+    <p id="displayError" v-for="(message, index) in errorMessage" :key="index">{{message}}</p>
   </div>
 </template>
 
 <script>
 import validator from "validator";
-import UserService from '../services/UserService';
+import UserService from "../services/UserService";
 
 export default {
   name: "signup",
@@ -92,22 +93,52 @@ export default {
         password: false,
         confirmPW: false
       },
-      errorMessage: ""
+      errorMessage: []
     };
   },
   methods: {
     checkForm: async function() {
-      this.errors.email = !validator.isEmail(this.newUser.email) ? true : false;
-      this.errors.username = this.newUser.username == "" ? true : false;
-      this.errors.firstName = this.newUser.firstName == "" ? true : false;
-      this.errors.lastName = this.newUser.lastName == "" ? true : false;
-      this.errors.password =
-        this.newUser.password == "" ||
+      this.errorMessage = [];
+      this.errors = {
+        email: false,
+        username: false,
+        firstName: false,
+        lastName: false,
+        password: false,
+        confirmPW: false
+      };
+      if (this.newUser.firstName == "") {
+        this.errors.firstName = true;
+        this.errorMessage.push("First name cannot be blank!");
+      }
+      if (this.newUser.lastName == "") {
+        this.errors.lastName = true;
+        this.errorMessage.push("Last name cannot be blank!");
+      }
+      if (!validator.isEmail(this.newUser.email)) {
+        this.errors.email = true;
+        this.errorMessage.push("Email is invalid!");
+      } else if (this.newUser.email == "") {
+        this.errors.email = true;
+        this.errorMessage.push("Email cannot be blank!");
+      }
+      if (this.newUser.username == "") {
+        this.errors.username = true;
+        this.errorMessage.push("Username cannot be blank!");
+      }
+      if (this.newUser.password == "") {
+        this.errors.password = true;
+        this.errorMessage.push("Password cannot be blank!");
+      } else if (
         !validator.isLength(this.newUser.password, { min: 6, max: 128 })
-          ? true
-          : false;
-      this.errors.confirmPW =
-        this.newUser.password != this.newUser.confirmPW ? true : false;
+      ) {
+        this.errors.password = true;
+        this.errorMessage.push("Password too short!");
+      } else if (this.newUser.password != this.newUser.confirmPW) {
+        this.errors.confirmPW = true;
+        this.errors.password = true;
+        this.errorMessage.push("Password didn't match!");
+      }
 
       if (
         this.errors.email === false &&
@@ -122,12 +153,16 @@ export default {
           firstName: this.newUser.firstName,
           lastName: this.newUser.lastName,
           password: this.newUser.password
-        }).then(res => {
-          if (res.status == 201)
-            this.$router.push("/login")
-          }).catch(err => {
-          this.errorMessage = "Email exists!";
-          console.log(err)});
+        })
+          .then(res => {
+            if (res.status == 201) this.$router.push("/login");
+            else {
+              this.errorMessage.push("Email or username exists!");
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     }
   }
@@ -315,7 +350,8 @@ form.form {
   color: red;
   font-family: "Ubuntu", sans-serif;
   font-size: 16px;
-  margin: 25px 0px 0px 50px;
+  margin: 0px 0px 0px 50px;
+  padding: 0px 0px 25px 0px;
 }
 
 @media (max-width: 600px) {
