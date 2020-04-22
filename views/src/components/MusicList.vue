@@ -30,12 +30,11 @@
             <span class="duration">{{ formatSeconds(item.duration) }}</span>
           </li>
         </ul>
-        
       </div>
       <div>
-        <p id="tooltip"> Click the heart to add to your playlist! Click again to remove!</p>
-        <p id="tooltip"> Click on the song to view album image!</p>
-        <p id="tooltip"> Click the play button to the right side to play your playlist!</p>
+        <p id="tooltip">Click the heart to add to your playlist! Click again to remove!</p>
+        <p id="tooltip">Click on the song to view album image!</p>
+        <p id="tooltip">Click the play button to the right side to play your playlist!</p>
       </div>
     </div>
     <div class="box_right">
@@ -90,32 +89,26 @@ export default {
   async created() {
     this.playlist = [];
     this.searchList = this.$store.getters.getSearchResults;
-    
+
     await SongService.retrievePlaylist(this.$store.getters.userInfo)
       .then(res => {
         if (res.status == 200) {
           this.playlist = res.data.result.songs;
           this.playlistName = res.data.result.playlistName;
-        } 
+        }
       })
       .catch(err => {
         console.log(err);
       });
 
-    if (
-      this.searchList != null &&
-      this.searchList != [] &&
-      this.playlist != []
-    ) {
-      this.searchList.forEach(e => {
-        e.checked = false;
-      });
+    this.searchList.forEach(e => {
+      e.checked = false;
+    });
 
-      for (var i = 0; i < this.searchList.length; i++) {
-        for (var j = 0; j < this.playlist.length; j++) {
-          if (this.searchList[i].url == this.playlist[j].url) {
-            this.searchList[i].checked = true;
-          }
+    for (var i = 0; i < this.searchList.length; i++) {
+      for (var j = 0; j < this.playlist.length; j++) {
+        if (this.searchList[i].url == this.playlist[j].url) {
+          this.searchList[i].checked = true;
         }
       }
     }
