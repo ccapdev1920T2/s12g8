@@ -50,11 +50,10 @@
       <div class="playlist_box">
         <ul>
           <li class="playlist_title clearfix border-top">
-            <span class="title" @click="$emit('toggle')">
+            <span class="title" @click="$store.commit('togglePlayerWithDecision', true)">
               {{ playlistName }} &nbsp;&nbsp;&nbsp;&nbsp;
               <i
                 id="play"
-                @click="$emit('toggle')"
                 class="fa fa-play"
               ></i>
             </span>

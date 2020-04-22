@@ -43,7 +43,7 @@ export default {
     async search() {
       if (this.query !== ""){
         await SongService.searchSong(this.query).then((res) => {
-          this.$store.commit('togglePlayer', false);
+          this.$store.commit('togglePlayerWithDecision', false);
           this.$store.commit('retrieveSearchResults', res.data.songs);
           this.$router.push('/player');
         }).catch(err => {

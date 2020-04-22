@@ -45,7 +45,7 @@
       </div>
 
       <div id="menu">
-        <button id="searchButton" @click="$emit('toggle')">
+        <button id="searchButton" @click="$store.commit('togglePlayer')">
           <i class="fa fa-search"></i>
         </button>
         <button id="repeat" :style="repeatColor" @click="toggleRepeat">
@@ -340,7 +340,7 @@ export default {
           if (this.playlist.length == 0) {
             this.playSong();
             this.currentSong = {};
-            this.$emit("toggle");
+            this.$router.push('/');
           }
           if (this.currentSong.url == song.url) {
             this.currentSong = this.playlist[0];
