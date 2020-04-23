@@ -40,6 +40,15 @@
 14) 	email: Jeonard@yahoo.com
 	username: FatTurtle
 	password: Jeonard
-15) 	email: Rowena@gmail.com
+15) 	email: Carlos1@yahoo.com
+	username: Carlos1
+	password: carlos
+16) 	email: Rowena@gmail.com
 	username: RowenaWang
 	password: Rowena
+17) 	email: Hatdog@gmail.com
+	username: Hatdog
+	password: Hatdog
+18) 	email: AyaMaruyama@bandori.com
+	username: Aya-Des
+	password: AyaMaruyama
