@@ -52,3 +52,9 @@
 18) 	email: AyaMaruyama@bandori.com
 	username: Aya-Des
 	password: AyaMaruyama
+19) 	email: a@a.com
+	username: a
+	password:
+20) 	email:arren.antioquia@dlsu.edu.ph
+	username: amc
+	password:
