@@ -1,10 +1,13 @@
 const User = require("../models/UserModel.js");
+const Playlist = require("../models/PlaylistModel");
 // const db = require('../models/db.js');
 const bcrypt = require("bcrypt");
 
 const userSignupController = {
   postSignUp: function (req, res) {
-    User.findOne({$or: [{ email: req.body.account }, {username: req.body.account}]})
+    User.findOne({
+      $or: [{ email: req.body.account }, { username: req.body.account }],
+    })
       .exec()
       .then((user) => {
         if (user) {
@@ -28,9 +31,26 @@ const userSignupController = {
               user
                 .save()
                 .then((result) => {
-                  res.status(201).json({
-                    message: "User created",
+                  var arr = [];
+                  const playlist = new Playlist({
+                    username: req.body.username,
+                    playlistName: "playlist",
+                    songs: arr,
                   });
+
+                  playlist
+                    .save()
+                    .then((result) => {
+                      res.status(201).json({
+                        message: "User and playlist created",
+                      });
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                      res.status(500).json({
+                        error: err,
+                      });
+                    });
                 })
                 .catch((err) => {
                   console.log(err);
@@ -55,7 +75,7 @@ const userSignupController = {
       .exec()
       .then((result) => {
         res.status(200).json({
-          message: 'User deleted',
+          message: "User deleted",
         });
       })
       .catch((err) => {

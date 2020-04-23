@@ -50,58 +50,28 @@ const playlistController = {
   },
 
   addSongToPlaylist: function (req, res) {
-    Playlist.findOne({ username: req.body.username })
+    Playlist.findOneAndUpdate(
+      { username: req.body.username },
+      {
+        $push: {
+          songs: {
+            title: req.body.song.title,
+            artist: req.body.song.artist,
+            genre: req.body.song.genre,
+            lyrics: req.body.song.lyrics,
+            duration: req.body.song.duration,
+            coverImage: req.body.song.coverImage,
+            url: req.body.song.url,
+          },
+        },
+      }
+    )
       .exec()
       .then((result) => {
         if (result) {
-          Playlist.updateOne(
-            { username: req.body.username },
-            {
-              $push: {
-                songs: {
-                  title: req.body.song.title,
-                  artist: req.body.song.artist,
-                  genre: req.body.song.genre,
-                  lyrics: req.body.song.lyrics,
-                  duration: req.body.song.duration,
-                  coverImage: req.body.song.coverImage,
-                  url: req.body.song.url,
-                },
-              },
-            }
-          )
-            .then(
-              res.status(200).json({
-                message: "Playlist updated",
-              })
-            )
-            .catch((err) => {
-              console.log(err);
-              res.status(500).json({
-                error: err,
-              });
-            });
-        } else {
-          var arr = [req.body.song];
-          const playlist = new Playlist({
-            username: req.body.username,
-            playlistName: "playlist",
-            songs: arr,
+          res.status(200).json({
+            message: "Playlist updated",
           });
-
-          playlist
-            .save()
-            .then((result) => {
-              res.status(201).json({
-                message: "Playlist created",
-              });
-            })
-            .catch((err) => {
-              console.log(err);
-              res.status(500).json({
-                error: err,
-              });
-            });
         }
       })
       .catch((err) => {
