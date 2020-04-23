@@ -12,7 +12,7 @@
         </h5>
         <h5>
           Genre
-          <span style="font-size: smaller;">{{ song.genre.toString()}}</span>
+          <span style="font-size: smaller;">{{ song.genre.toString() }}</span>
         </h5>
         <div class="lyric_box">
           <p class="card-text" v-for="(line, index) in song.lyrics" :key="index">{{ line }}</p>
