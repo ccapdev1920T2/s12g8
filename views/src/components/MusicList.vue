@@ -52,10 +52,7 @@
           <li class="playlist_title clearfix border-top">
             <span class="title" @click="$store.commit('togglePlayerWithDecision', true)">
               {{ playlistName }} &nbsp;&nbsp;&nbsp;&nbsp;
-              <i
-                id="play"
-                class="fa fa-play"
-              ></i>
+              <i id="play" class="fa fa-play"></i>
             </span>
           </li>
           <li
@@ -82,7 +79,7 @@ export default {
       searchList: [],
       selectedItem: {},
       playlist: [],
-      playlistName: ""
+      playlistName: "playlist"
     };
   },
   async created() {
@@ -118,6 +115,8 @@ export default {
         await SongService.addToPlaylist(this.$store.getters.userInfo, song)
           .then(() => {
             this.playlist.push(song);
+          })
+          .then(() => {
             for (var i = 0; i < this.searchList.length; i++) {
               for (var j = 0; j < this.playlist.length; j++) {
                 if (this.searchList[i].url == this.playlist[j].url) {
@@ -135,6 +134,8 @@ export default {
             this.playlist = this.playlist.filter(item => {
               return item.url !== song.url;
             });
+          })
+          .then(() => {
             for (var i = 0; i < this.searchList.length; i++) {
               for (var j = 0; j < this.playlist.length; j++) {
                 if (this.searchList[i].url == this.playlist[j].url) {

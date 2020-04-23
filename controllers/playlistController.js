@@ -1,14 +1,14 @@
 const Playlist = require("../models/PlaylistModel");
 
 const playlistController = {
-  updatePlaylistName: function(req, res) {
+  updatePlaylistName: function (req, res) {
     Playlist.findOne({ username: req.body.username })
       .exec()
       .then((result) => {
         if (result) {
           Playlist.updateOne(
             { username: req.body.username },
-            { $set: { playlistName: req.body.name }}
+            { $set: { playlistName: req.body.name } }
           )
             .then(
               res.status(200).json({
@@ -56,7 +56,19 @@ const playlistController = {
         if (result) {
           Playlist.updateOne(
             { username: req.body.username },
-            { $push: { songs: req.body.song } }
+            {
+              $push: {
+                songs: {
+                  title: req.body.song.title,
+                  artist: req.body.song.artist,
+                  genre: req.body.song.genre,
+                  lyrics: req.body.song.lyrics,
+                  duration: req.body.song.duration,
+                  coverImage: req.body.song.coverImage,
+                  url: req.body.song.url,
+                },
+              },
+            }
           )
             .then(
               res.status(200).json({
@@ -99,7 +111,7 @@ const playlistController = {
         });
       });
   },
-  
+
   removeFromPlaylist: function (req, res) {
     Playlist.findOne({ username: req.body.username })
       .exec()
@@ -107,7 +119,7 @@ const playlistController = {
         if (result) {
           Playlist.updateOne(
             { username: req.body.username },
-            { $pull: { songs: req.body.song } }
+            { $pull: { songs: { url: req.body.song.url } } }
           )
             .then(
               res.status(200).json({
