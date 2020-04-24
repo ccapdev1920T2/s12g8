@@ -13,8 +13,8 @@ Infinite Loop is a music player webapp. It implements Vue as the frontend framew
 7. View mongoDB changes using mongoDB compass with the connection string located in models/db.js
 ### Note
 - Songs may take 2-3 minutes to appear after trying to add one
-- Other accounts can be found inside https://github.com/ccapdev1920T2/s12g8/blob/master/misc/User_Database.txt
-- If ever songs need to be re-inserted manually refer to https://github.com/ccapdev1920T2/s12g8/blob/master/misc/songDB.json
+- Other accounts can be found inside [here](https://github.com/ccapdev1920T2/s12g8/blob/master/misc/User_Database.txt)
+- If ever songs need to be re-inserted manually refer to [here](https://github.com/ccapdev1920T2/s12g8/blob/master/misc/songDB.json)
 - Other part of the application may also take some time depending on connectivity
 
 ## Authors
